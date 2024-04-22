@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class LinkedList {
     TNode head;
     TNode tail;
@@ -38,6 +40,20 @@ public class LinkedList {
             }
         }
     }
+    public double calcBalance(){
+        TNode current = head;
+        double balance = 0;
+        while (current != null){
+            if (Objects.equals(current.getTrans().getTransType(), "deposit")){
+                balance += current.getTrans().getAmount();
+            }
+            else  {
+                balance -= current.getTrans().getAmount();
+            }
+            current = current.getNext();
+        }
+        return balance;
+    }
     public TNode findNode(Date date){
         TNode current = head;
         while (current != null) {
@@ -71,8 +87,6 @@ public class LinkedList {
         }
         return count;
     }
-//    public double accBalance(){
-//
-//    }
 }
+
 
