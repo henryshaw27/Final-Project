@@ -338,8 +338,10 @@ public class Main extends JFrame implements Serializable {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 double maxTransaction = checkingList.max(checkingList.head);
+                double maxBalance = checkingList.maxBalance(checkingList.head);
                 int length = checkingList.length();
                 outputChecking.append("Max Transaction: $" + maxTransaction + "\n");
+                outputChecking.append("Max Balance: $" + maxBalance + "\n");
                 outputChecking.append("Amount of Transactions: " + length + "\n");
             }
         });
@@ -460,8 +462,10 @@ public class Main extends JFrame implements Serializable {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 double maxTransaction = savingsList.max(savingsList.head);
+                double maxBalance = savingsList.max(savingsList.head);
                 int length = savingsList.length();
                 outputSavings.append("Max Transaction: $" + maxTransaction + "\n");
+                outputSavings.append("Max Balance: $" + maxBalance + "\n");
                 outputSavings.append("Amount of Transactions: " + length + "\n");
             }
         });
