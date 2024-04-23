@@ -38,7 +38,7 @@ public class Main extends JFrame implements Serializable {
 
                 // Finds maximum balance for y axis size
                 while (current != null) {
-                    maxBalance = Math.max(maxBalance, current.getTrans().getAmount());
+                    maxBalance = Math.max(maxBalance, current.getTrans().getBalance());
                     current = current.getNext();
                 }
 
@@ -50,7 +50,7 @@ public class Main extends JFrame implements Serializable {
 
                 // Draws y-axis label
                 g2d.rotate(-Math.PI / 2);
-                g2d.drawString("Transaction Amount", -height / 2, padding / 2);
+                g2d.drawString("Account Balance", -height / 2, padding / 2);
                 g2d.rotate(Math.PI / 2);
 
 
@@ -59,7 +59,7 @@ public class Main extends JFrame implements Serializable {
                 int prevX = padding, prevY = height - padding;
                 while (current != null) {
                     int x = padding + xScale;
-                    int y = height - padding - (int) (current.getTrans().getAmount() * yScale);
+                    int y = height - padding - (int) (current.getTrans().getBalance() * yScale);
                     g2d.fillOval(x - 2, y - 2, 4, 4); // Draw points
                     g2d.drawLine(prevX, prevY, x, y); // Draw lines
                     prevX = x;
@@ -100,7 +100,7 @@ public class Main extends JFrame implements Serializable {
 
                 // Find maximum balance
                 while (current != null) {
-                    maxBalance = Math.max(maxBalance, current.getTrans().getAmount());
+                    maxBalance = Math.max(maxBalance, current.getTrans().getBalance());
                     current = current.getNext();
                 }
 
@@ -112,7 +112,7 @@ public class Main extends JFrame implements Serializable {
 
                 // Draw y-axis label
                 g2d.rotate(-Math.PI / 2);
-                g2d.drawString("Transaction Amount", -height / 2, padding / 2);
+                g2d.drawString("Account Balance", -height / 2, padding / 2);
                 g2d.rotate(Math.PI / 2);
 
 
@@ -121,7 +121,7 @@ public class Main extends JFrame implements Serializable {
                 int prevX = padding, prevY = height - padding;
                 while (current != null) {
                     int x = padding + xScale;
-                    int y = height - padding - (int) (current.getTrans().getAmount() * yScale);
+                    int y = height - padding - (int) (current.getTrans().getBalance() * yScale);
                     g2d.fillOval(x - 2, y - 2, 4, 4); // Draw points
                     g2d.drawLine(prevX, prevY, x, y); // Draw lines
                     prevX = x;
@@ -280,7 +280,7 @@ public class Main extends JFrame implements Serializable {
 
                 if (!exCaught) {
                     try {
-                        trans = new transaction(cTransType, checkingName.getText(), Double.parseDouble(checkingAmount.getText()), date);
+                        trans = new transaction(cTransType, checkingName.getText(), Double.parseDouble(checkingAmount.getText()), date, checkingList.calcBalance());
                     } catch (NumberFormatException exception) {
                         outputChecking.append("Amount must be a number" + "\n");
                         exCaught = true;
@@ -294,7 +294,7 @@ public class Main extends JFrame implements Serializable {
                         transaction ttrans = new transaction("deposit",
                                 "Savings Transfer: " + checkingName.getText(),
                                 Double.parseDouble(checkingAmount.getText()),
-                                date);
+                                date, checkingList.calcBalance());
                         savingsList.insertNode(ttrans);
                     }
                     checkingBalanceLabel.setText("Checking account balance: $" + checkingList.calcBalance());
@@ -405,7 +405,7 @@ public class Main extends JFrame implements Serializable {
 
                 if (!exCaught) {
                     try {
-                        trans = new transaction(sTransType, savingsName.getText(), Double.parseDouble(savingsAmount.getText()), date);
+                        trans = new transaction(sTransType, savingsName.getText(), Double.parseDouble(savingsAmount.getText()), date, savingsList.calcBalance());
                     } catch (NumberFormatException exception) {
                         outputSavings.append("Amount must be a number" + "\n");
                         exCaught = true;
@@ -419,7 +419,7 @@ public class Main extends JFrame implements Serializable {
                         transaction ttrans = new transaction("deposit",
                                 "Checking Transfer: " + savingsName.getText(),
                                 Double.parseDouble(savingsAmount.getText()),
-                                date);
+                                date, savingsList.calcBalance());
                         checkingList.insertNode(ttrans);
                     }
                     checkingBalanceLabel.setText("Checking account balance: $" + checkingList.calcBalance());

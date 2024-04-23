@@ -93,6 +93,20 @@ public class LinkedList implements Serializable{
         }
         return count;
     }
+    public double maxBalance(TNode node){
+        double maxBalance = 0;
+        TNode current = node;
+        if (current == null){
+            return maxBalance;
+        }
+        while (current != null) {
+            if (current.getTrans().getBalance() > maxBalance) {
+                maxBalance = current.getTrans().getBalance();
+            }
+            current = current.getNext();
+        }
+        return maxBalance;
+    }
 }
 
 
