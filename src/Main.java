@@ -15,7 +15,7 @@ public class Main extends JFrame implements Serializable {
    //method to create visualization showing sizes of transactions for checking account
     public void drawCheckingChart() {
         JFrame chartFrame = new JFrame("Checking Account Transaction History");
-        chartFrame.setSize(600, 400);
+        chartFrame.setSize(800, 800);
         chartFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel checkingChartPanel = new JPanel() {
@@ -77,7 +77,7 @@ public class Main extends JFrame implements Serializable {
 
     public void drawSavingsChart() {
         JFrame chartFrame = new JFrame("Savings Account Transaction History");
-        chartFrame.setSize(600, 400);
+        chartFrame.setSize(800, 800);
         chartFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel savingsChartPanel = new JPanel() {
