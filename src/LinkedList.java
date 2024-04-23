@@ -1,6 +1,7 @@
 import java.util.Objects;
+import java.io.Serializable;
 
-public class LinkedList {
+public class LinkedList implements Serializable{
     TNode head;
     TNode tail;
 
@@ -54,10 +55,10 @@ public class LinkedList {
         }
         return balance;
     }
-    public TNode findNode(Date date){
+    public TNode findNode(String name){
         TNode current = head;
         while (current != null) {
-            if (current.getTrans().getDate().equals(date)) {
+            if (current.getTrans().getName().equals(name)) {
                 return current;
             }
             current = current.getNext();
@@ -88,5 +89,6 @@ public class LinkedList {
         return count;
     }
 }
+
 
 

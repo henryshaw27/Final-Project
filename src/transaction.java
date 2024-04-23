@@ -1,4 +1,6 @@
-public class transaction {
+import java.io.Serializable;
+
+public class transaction implements Serializable {
     private double amount;
     public String transType, name;
     public Date date;
@@ -25,4 +27,5 @@ public class transaction {
         return transType;
     }
 }
+
 

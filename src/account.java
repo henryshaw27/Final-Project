@@ -1,4 +1,6 @@
-public class account {
+import java.io.Serializable;
+
+public class account implements Serializable {
     LinkedList transactionLog;
     double balance;
     String accName, type;
