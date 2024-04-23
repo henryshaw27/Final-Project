@@ -21,6 +21,7 @@ public class LinkedList implements Serializable{
         }
         tail = node;
     }
+    //removes node from list by name
     public void removeDuplicate(String name) {
         TNode current = head;
         TNode previous = null;
@@ -41,6 +42,7 @@ public class LinkedList implements Serializable{
             }
         }
     }
+    //calculates account balance
     public double calcBalance(){
         TNode current = head;
         double balance = 0;
@@ -55,6 +57,7 @@ public class LinkedList implements Serializable{
         }
         return balance;
     }
+    //searches for node based on name
     public TNode findNode(String name){
         TNode current = head;
         while (current != null) {
@@ -65,6 +68,7 @@ public class LinkedList implements Serializable{
         }
         return null;
     }
+    //finds maximum transaction
     public double max(TNode node){
         double maxTransaction = 0;
         TNode current = node;
@@ -79,6 +83,7 @@ public class LinkedList implements Serializable{
         }
         return maxTransaction;
     }
+    //finds amount of transactions
     public int length() {
         int count = 0;
         TNode current = head;

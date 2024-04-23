@@ -1,5 +1,5 @@
 import java.io.Serializable;
-
+//transaction class for elements of transaction
 public class transaction implements Serializable {
     private double amount;
     public String transType, name;

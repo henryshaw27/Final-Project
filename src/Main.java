@@ -12,12 +12,13 @@ import java.lang.NumberFormatException;
 
 
 public class Main extends JFrame implements Serializable {
+   //method to create visualization showing sizes of transactions for checking account
     public void drawCheckingChart() {
-        JFrame chartFrame = new JFrame("Checking Account Balance History");
+        JFrame chartFrame = new JFrame("Checking Account Transaction History");
         chartFrame.setSize(600, 400);
         chartFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JPanel chartPanel = new JPanel() {
+        JPanel checkingChartPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -27,15 +28,15 @@ public class Main extends JFrame implements Serializable {
                 int height = getHeight();
                 int padding = 30;
 
-                // Draw x-axis
+                // Draws x-axis
                 g2d.drawLine(padding, height - padding, width - padding, height - padding);
-                // Draw y-axis
+                // Draws y-axis
                 g2d.drawLine(padding, padding, padding, height - padding);
 
                 TNode current = checkingList.head;
                 double maxBalance = 0;
 
-                // Find maximum balance
+                // Finds maximum balance for y axis size
                 while (current != null) {
                     maxBalance = Math.max(maxBalance, current.getTrans().getAmount());
                     current = current.getNext();
@@ -44,16 +45,16 @@ public class Main extends JFrame implements Serializable {
                 int xScale = (width - 2 * padding) / (checkingList.length() + 1);
                 int yScale = (height - 2 * padding) / (int) (maxBalance + 1);
 
-                // Draw x-axis label
+                // Draws x-axis label
                 g2d.drawString("Date Entered", width / 2, height - padding / 2);
 
-                // Draw y-axis label
+                // Draws y-axis label
                 g2d.rotate(-Math.PI / 2);
                 g2d.drawString("Transaction Amount", -height / 2, padding / 2);
                 g2d.rotate(Math.PI / 2);
-                
 
-                // Draw points and lines
+
+                // Draws points and lines
                 current = checkingList.head;
                 int prevX = padding, prevY = height - padding;
                 while (current != null) {
@@ -70,7 +71,69 @@ public class Main extends JFrame implements Serializable {
         };
 
 
-        chartFrame.add(chartPanel);
+        chartFrame.add(checkingChartPanel);
+        chartFrame.setVisible(true);
+    }
+
+    public void drawSavingsChart() {
+        JFrame chartFrame = new JFrame("Savings Account Transaction History");
+        chartFrame.setSize(600, 400);
+        chartFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel savingsChartPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                Graphics2D g2d = (Graphics2D) g;
+                int width = getWidth();
+                int height = getHeight();
+                int padding = 30;
+
+                // Draw x-axis
+                g2d.drawLine(padding, height - padding, width - padding, height - padding);
+                // Draw y-axis
+                g2d.drawLine(padding, padding, padding, height - padding);
+
+                TNode current = savingsList.head;
+                double maxBalance = 0;
+
+                // Find maximum balance
+                while (current != null) {
+                    maxBalance = Math.max(maxBalance, current.getTrans().getAmount());
+                    current = current.getNext();
+                }
+
+                int xScale = (width - 2 * padding) / (savingsList.length() + 1);
+                int yScale = (height - 2 * padding) / (int) (maxBalance + 1);
+
+                // Draw x-axis label
+                g2d.drawString("Date Entered", width / 2, height - padding / 2);
+
+                // Draw y-axis label
+                g2d.rotate(-Math.PI / 2);
+                g2d.drawString("Transaction Amount", -height / 2, padding / 2);
+                g2d.rotate(Math.PI / 2);
+
+
+                // Draw points and lines
+                current = savingsList.head;
+                int prevX = padding, prevY = height - padding;
+                while (current != null) {
+                    int x = padding + xScale;
+                    int y = height - padding - (int) (current.getTrans().getAmount() * yScale);
+                    g2d.fillOval(x - 2, y - 2, 4, 4); // Draw points
+                    g2d.drawLine(prevX, prevY, x, y); // Draw lines
+                    prevX = x;
+                    prevY = y;
+                    current = current.getNext();
+                    xScale += (width - 2 * padding) / (savingsList.length() + 1);
+                }
+            }
+        };
+
+
+        chartFrame.add(savingsChartPanel);
         chartFrame.setVisible(true);
     }
     static LinkedList checkingList = new LinkedList();
@@ -402,6 +465,13 @@ public class Main extends JFrame implements Serializable {
                 outputSavings.append("Amount of Transactions: " + length + "\n");
             }
         });
+        savingsVisualButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drawSavingsChart();
+            }
+        });
+
 
         //panel for checking radio buttons
         JPanel checkingRadioButtonPanel = new JPanel(new GridLayout(3,1));

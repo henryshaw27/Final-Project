@@ -1,5 +1,5 @@
 import java.io.Serializable;
-
+//account class for elements of account
 public class account implements Serializable {
     LinkedList transactionLog;
     double balance;

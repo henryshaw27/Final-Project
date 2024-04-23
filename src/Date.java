@@ -1,4 +1,5 @@
 import java.io.Serializable;
+//date class to track month, day, and year
 
 public class Date implements Serializable {
     int month, day, year;
