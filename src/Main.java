@@ -289,7 +289,10 @@ public class Main extends JFrame implements Serializable {
 
                 if (!exCaught) {
                     checkingList.insertNode(trans);
-                    outputChecking.append(trans.getName() + " added to transactions." + "\n");
+                    outputChecking.append("Transaction Added: " + trans.getName() + "\n");
+                    outputChecking.append("Amount: " + trans.getAmount() + "\n");
+                    outputChecking.append("Transaction Type: " + trans.getTransType() + "\n");
+                    outputChecking.append("Date: " + trans.getDate().getMonth() + "/" + trans.getDate().getDay() + "/" + trans.getDate().getYear() + "\n");
                     if (trans.getTransType().equals("transfer")) {
                         transaction ttrans = new transaction("deposit",
                                 "Savings Transfer: " + checkingName.getText(),
@@ -416,7 +419,10 @@ public class Main extends JFrame implements Serializable {
 
                 if (!exCaught) {
                     savingsList.insertNode(trans);
-                    outputSavings.append(trans.getName() + " added to transactions." + "\n");
+                    outputSavings.append("Transaction Added: " + trans.getName() + "\n");
+                    outputSavings.append("Amount: " + trans.getAmount() + "\n");
+                    outputSavings.append("Transaction Type: " + trans.getTransType() + "\n");
+                    outputSavings.append("Date: " + trans.getDate().getMonth() + "/" + trans.getDate().getDay() + "/" + trans.getDate().getYear() + "\n");
                     if (trans.getTransType().equals("transfer")) {
                         transaction ttrans = new transaction("deposit",
                                 "Checking Transfer: " + savingsName.getText(),
